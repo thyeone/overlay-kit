@@ -5,7 +5,7 @@ export type OverlayReducerAction =
   | { type: 'OPEN'; overlayId: string }
   | { type: 'CLOSE'; overlayId: string; duration?: number }
   | { type: 'REMOVE'; overlayId: string }
-  | { type: 'CLOSE_ALL' }
+  | { type: 'CLOSE_ALL'; duration?: number }
   | { type: 'REMOVE_ALL' };
 
 export function overlayReducer(state: OverlayData, action: OverlayReducerAction): OverlayData {

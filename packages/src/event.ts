@@ -40,14 +40,14 @@ async function openAsync<T>(controller: OverlayAsyncControllerComponent<T>, opti
   });
 }
 
-function close(overlayId: string) {
-  dispatchOverlay({ type: 'CLOSE', overlayId });
+function close(overlayId: string, duration?: number) {
+  dispatchOverlay({ type: 'CLOSE', overlayId, duration });
 }
 function unmount(overlayId: string) {
   dispatchOverlay({ type: 'REMOVE', overlayId });
 }
-function closeAll() {
-  dispatchOverlay({ type: 'CLOSE_ALL' });
+function closeAll(duration?: number) {
+  dispatchOverlay({ type: 'CLOSE_ALL', duration });
 }
 function unmountAll() {
   dispatchOverlay({ type: 'REMOVE_ALL' });

@@ -3,7 +3,7 @@ import { type OverlayData, type OverlayItem } from './store';
 export type OverlayReducerAction =
   | { type: 'ADD'; overlay: OverlayItem }
   | { type: 'OPEN'; overlayId: string }
-  | { type: 'CLOSE'; overlayId: string }
+  | { type: 'CLOSE'; overlayId: string; duration?: number }
   | { type: 'REMOVE'; overlayId: string }
   | { type: 'CLOSE_ALL' }
   | { type: 'REMOVE_ALL' };
@@ -48,6 +48,7 @@ export function overlayReducer(state: OverlayData, action: OverlayReducerAction)
         (orderedOverlayId) => state.overlayData[orderedOverlayId].isOpen === true
       );
       const targetIndexInOpenedList = openedOverlayOrderList.findIndex((item) => item === action.overlayId);
+      const remainingOverlays = state.overlayOrderList.filter((item) => item !== action.overlayId);
 
       /**
        * @description If closing the last overlay, specify the overlay before it.

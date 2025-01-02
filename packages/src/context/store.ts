@@ -29,6 +29,22 @@ function emitChangeListener() {
 export function dispatchOverlay(action: OverlayReducerAction) {
   overlays = overlayReducer(overlays, action);
   emitChangeListener();
+
+  if (action.type === 'CLOSE') {
+    const timer = setTimeout(() => {
+      dispatchOverlay({ type: 'REMOVE', overlayId: action.overlayId });
+    }, action.duration ?? 300);
+
+    return () => clearTimeout(timer);
+  }
+
+  if (action.type === 'CLOSE_ALL') {
+    const timer = setTimeout(() => {
+      dispatchOverlay({ type: 'REMOVE_ALL' });
+    }, action.duration ?? 300);
+
+    return () => clearTimeout(timer);
+  }
 }
 
 /**
